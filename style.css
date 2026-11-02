@@ -452,6 +452,16 @@ canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: n
 }
 .controls:hover { opacity: 1; }
 body.hide-cursor .controls { opacity: 0; pointer-events: none; }
+.controls select {
+  font: 500 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #fff;
+  background: rgba(20, 20, 24, .7);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+.decor { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
 .controls button {
   font: 500 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
   letter-spacing: .08em;

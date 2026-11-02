@@ -8,6 +8,8 @@
  *  Keys:  T = test (start the 60 s countdown now)   C = skip straight to the celebration
  *         L = show the letter
  *         F = fullscreen                            R / Esc = back to real time
+ *         1…9 = switch theme
+ *  Themes: ?theme=classic|dopamine|kitty|magazine|vinyl  (or the dropdown next to Test)
  *  URL:   ?test       start the test countdown on load (?test=10 → from 10 s)
  *         ?daily      run the countdown every night at 23:59
  *         ?celebrate  open directly in celebration mode
@@ -24,6 +26,14 @@
 
   var state = null;
   var body = document.body;
+
+  // the active theme (themes/<id>.js) can hook into everything below
+  var TH = window.THEME || {};
+  function hook(name) {
+    if (typeof TH[name] === "function") {
+      try { return TH[name].apply(TH, Array.prototype.slice.call(arguments, 1)); } catch (e) { console.error(e); }
+    }
+  }
 
   /* ───────────── time helpers ───────────── */
   function isBirthday(d) {
@@ -45,6 +55,10 @@
     return '<span class="l" style="--i:' + i + '">' + ch + "</span>";
   }).join("");
   document.querySelector(".age span").textContent = CFG.age;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fill]"), function (el) {
+    var v = { short: CFG.nameShort, name: CFG.name, age: CFG.age }[el.getAttribute("data-fill")];
+    if (v != null) el.textContent = v;
+  });
 
   /* ───────────── idle ───────────── */
   var clockEl = document.getElementById("clock");
@@ -76,7 +90,10 @@
       void cdNum.offsetWidth; // restart animation
       cdNum.classList.add("tick");
       document.getElementById("countdown").classList.toggle("final", sec <= 10);
+      body.setAttribute("data-sec", sec);
+      hook("onSecond", sec);
     }
+    hook("onCountdown", remaining, sec);
     var frac = Math.max(0, Math.min(1, remaining / 60000));
     ring.style.strokeDashoffset = (CIRC * (1 - frac)).toFixed(2);
   }
@@ -105,6 +122,7 @@
     el.innerHTML = '<div class="photo"></div><div class="cap"></div>';
     el.querySelector(".photo").style.backgroundImage = 'url("' + photo.src + '")';
     el.querySelector(".cap").textContent = photo.caption || "";
+    hook("decoratePhoto", el, photo);
     return el;
   }
 
@@ -113,7 +131,7 @@
     var right = document.getElementById("pl-right");
     left.innerHTML = right.innerHTML = "";
     slots = [];
-    var count = Math.min(4, photos.length);
+    var count = Math.min(TH.slots || 4, 4, photos.length);
     // order the slots so photos alternate left / right
     var order = [[left, 0], [right, 0], [left, 1], [right, 1]];
     for (var i = 0; i < 4; i++) {
@@ -167,7 +185,7 @@
         }
         putPhoto(slotIdx, nextPhoto);
         nextPhoto = (nextPhoto + 1) % photos.length;
-      }, 8000);
+      }, TH.photoInterval || 8000);
     }
   }
 
@@ -229,8 +247,10 @@
 
   function startCelebration(big) {
     var flash = document.querySelector(".flash");
-    if (big) {
-      flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go");
+    if (big) { flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go"); }
+    if (TH.celebrateFX) {
+      hook("celebrateFX", big, later);
+    } else if (big) {
       FX.burst(9);
       FX.setFireworks(2.6);
       later(1500, FX.heart);
@@ -243,10 +263,12 @@
       FX.setFireworks(0.18);
       later(800, function () { FX.burst(3); });
     }
-    // occasional heart, all night long
-    fwTimers.push(setInterval(function () { if (Math.random() < 0.5) FX.heart(); }, 45000));
-    later(2500, function () { FX.setPetals(Math.round(Math.min(innerWidth, innerHeight) / 18)); });
-    FX.setFireflies(0.6);
+    if (!TH.celebrateFX) {
+      // occasional heart, all night long
+      fwTimers.push(setInterval(function () { if (Math.random() < 0.5) FX.heart(); }, 45000));
+      later(2500, function () { FX.setPetals(Math.round(Math.min(innerWidth, innerHeight) / 18)); });
+      FX.setFireflies(0.6);
+    }
     later(big ? 70000 : 25000, showLetter);
     fwTimers.push(setInterval(showLetter, 300000));
     startPhotos();
@@ -263,6 +285,7 @@
     if (s === "idle") { FX.setFireworks(0); FX.setPetals(0); FX.setFireflies(1); }
     if (s === "countdown") { lastSec = -1; FX.setFireflies(0.45); }
     if (s === "celebrate") startCelebration(big !== undefined ? big : prev === "countdown");
+    hook("onState", s, prev);
   }
 
   function tick() {
@@ -323,6 +346,25 @@
     }
   }
 
+  /* theme picker */
+  var themeSel = document.getElementById("theme-select");
+  var TL = window.THEME_LIST || [];
+  TL.forEach(function (t) {
+    var o = document.createElement("option");
+    o.value = t.id; o.textContent = t.label;
+    if (t.id === window.THEME_ID) o.selected = true;
+    themeSel.appendChild(o);
+  });
+  function switchTheme(id) {
+    try { localStorage.setItem("roksa-theme", id); } catch (e) {}
+    var q = new URLSearchParams(location.search);
+    q.set("theme", id);
+    q.delete("test");
+    location.search = q.toString();
+  }
+  themeSel.addEventListener("change", function () { switchTheme(themeSel.value); });
+  themeSel.addEventListener("keydown", function (e) { e.stopPropagation(); });
+
   document.getElementById("btn-test").addEventListener("click", function (e) { e.stopPropagation(); runTest(60); });
   document.getElementById("btn-fs").addEventListener("click", function (e) { e.stopPropagation(); toggleFullscreen(); });
   document.addEventListener("dblclick", toggleFullscreen);
@@ -333,6 +375,7 @@
     else if (k === "f") toggleFullscreen();
     else if (k === "l") { if (state !== "celebrate") setState("celebrate", false); setTimeout(showLetter, 300); }
     else if (k === "r" || k === "escape") { offset = 0; resetCelebration(); setState("idle"); }
+    else if (/^[1-9]$/.test(k) && TL[+k - 1]) switchTheme(TL[+k - 1].id);
   });
 
   // hide cursor & buttons when nobody touches the mouse
@@ -359,6 +402,7 @@
   document.addEventListener("visibilitychange", function () { if (!document.hidden) keepAwake(); });
 
   /* ───────────── go ───────────── */
+  hook("setup");
   if (params.has("celebrate")) { setState("celebrate", true); }
   else if (params.has("test")) { runTest(parseInt(params.get("test"), 10) || 60); }
   requestAnimationFrame(tick);

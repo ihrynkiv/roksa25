@@ -1,0 +1,27 @@
+/* Shared reset for every non-classic theme: strip the classic ornaments, keep the structure. */
+.flowers, .vinyl, .bg .blob, .grain { display: none !important; }
+.state-countdown .bg::after { display: none; }
+.bg { background: var(--bg, #111) !important; transition: background .35s ease; }
+#fireworks { mix-blend-mode: normal; }
+
+.script { font-family: inherit; }
+.idle-name {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: inherit;
+  animation: none;
+  filter: none;
+  padding: 0;
+}
+.name { text-shadow: none; }
+.name .l { filter: none; }
+.cd-num { text-shadow: none; }
+.final .cd-num { text-shadow: none; }
+.age span { -webkit-text-stroke: 0; background: none; color: inherit; }
+.note::before, .note::after { display: none; }
+.polaroid::before { display: none; }
+.polaroid .photo { filter: none; box-shadow: none; }
+
+/* letters of a word, split by the theme for colour / bounce */
+.chars > span { display: inline-block; }

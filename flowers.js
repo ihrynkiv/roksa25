@@ -186,6 +186,7 @@
       (variant === 1 ? '<g transform="rotate(180 300 300)">' : "<g>") + parts.join("") + "</g></svg>";
   }
 
+  if (window.THEME_ID && window.THEME_ID !== "classic") return;
   var a = document.querySelector(".fl-a");
   var b = document.querySelector(".fl-b");
   if (a) a.innerHTML = cluster(7, 0);

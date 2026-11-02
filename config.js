@@ -8,14 +8,18 @@
  *  Portrait, landscape and square photos all work: the polaroid adapts.
  */
 window.BIRTHDAY = {
-  name: "Роксолано",          // vocative, used in "З днем народження, …"
-  nameShort: "Роксолана",
+  name: "Роксо",               // vocative, used in "З днем народження, …"
+  nameShort: "Рокса",          // used everywhere the name stands on its own
   age: 25,
   month: 11,                   // November
   day: 4,                      // the countdown runs 23:59:00 → 00:00 into this day
 
   // true = run the countdown every night at 23:59 (also enabled with ?daily in the URL)
   everyMidnight: false,
+
+  // Default look: classic | dopamine | kitty | magazine | vinyl
+  // (the dropdown next to "Test" and links like /roksa25/kitty/ override this and are remembered)
+  theme: "classic",
 
   PHOTOS: [
     { src: "assets/photos/bw-selfie.jpg",       caption: "головна героїня мого роману" },
@@ -45,7 +49,7 @@ window.BIRTHDAY = {
   // Edit freely — line breaks are kept. Press L to preview it.
   LETTER: {
     text:
-      "Роксолано,\n\n" +
+      "Роксо,\n\n" +
       "двадцять пʼять років тому світ отримав людину, яка читає «Грозовий перевал», як лист від старого друга, " +
       "заварює V60, ніби це маленька медитація, і сміється з Двайта до сліз.\n\n" +
       "А я отримав тебе — і досі не можу повірити, що мені так пощастило.\n\n" +

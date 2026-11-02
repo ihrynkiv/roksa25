@@ -1,0 +1,205 @@
+/* 📰 Magazine — dark editorial cover, acid-lime accent. */
+:root {
+  --bg: #0f0f0f;
+  --fg: #f1ede6;
+  --dim: rgba(241, 237, 230, .55);
+  --line: rgba(241, 237, 230, .16);
+  --lime: #d7ff3a;
+  --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --pad: 5vw;
+}
+html, body { background: var(--bg); color: var(--fg); font-family: var(--sans); }
+.flash { background: radial-gradient(circle, rgba(215, 255, 58, .9), rgba(215, 255, 58, 0) 70%); }
+
+/* ───── frame ───── */
+.mg-top, .mg-bottom {
+  position: absolute;
+  left: var(--pad); right: var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 500 calc(var(--u) * 1.6) / 1 var(--sans);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.mg-top { top: calc(var(--u) * 3.5); padding-bottom: calc(var(--u) * 1.4); border-bottom: 1px solid var(--line); }
+.mg-bottom { bottom: calc(var(--u) * 3); padding-top: calc(var(--u) * 1.4); border-top: 1px solid var(--line); }
+.mg-barcode { width: calc(var(--u) * 14); height: calc(var(--u) * 3); opacity: .7; }
+.mg-barcode svg { width: 100%; height: 100%; display: block; }
+.mg-ghost {
+  position: absolute;
+  right: calc(var(--pad) - var(--u) * 2);
+  bottom: calc(var(--u) * 2);
+  font: 800 calc(var(--u) * 80) / .8 var(--sans);
+  letter-spacing: -.07em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(241, 237, 230, .16);
+  transition: opacity 1.2s;
+}
+.state-countdown .mg-ghost, .state-celebrate .mg-ghost { opacity: 0; }
+
+/* ───── idle: left-aligned, giant clock ───── */
+#idle { align-items: flex-start; justify-content: flex-end; text-align: left; padding: 0 var(--pad) calc(var(--u) * 13); }
+.eyebrow { font: 500 calc(var(--u) * 1.8) / 1 var(--sans); letter-spacing: .26em; color: var(--lime); padding: 0; }
+.idle-name {
+  font: italic 300 calc(var(--u) * 12) / 1 var(--serif);
+  margin: calc(var(--u) * 1) 0 0;
+  color: var(--fg);
+}
+.clock {
+  font: 800 calc(var(--u) * 32) / .82 var(--sans);
+  letter-spacing: -.06em;
+  margin-left: -.04em;
+  color: var(--fg);
+}
+.clock span { font-size: .18em; letter-spacing: 0; color: var(--lime); vertical-align: 3.6em; margin-left: .4em; }
+.whisper { font: italic 300 calc(var(--u) * 4) / 1 var(--serif); color: var(--dim); margin-top: calc(var(--u) * 3); letter-spacing: 0; }
+
+/* ───── countdown ───── */
+#countdown { align-items: flex-start; justify-content: flex-end; text-align: left; padding: 0 var(--pad) calc(var(--u) * 12); }
+.cd-label { font: 500 calc(var(--u) * 2) / 1 var(--sans); letter-spacing: .3em; color: var(--lime); padding: 0; }
+.ring { display: none; }
+.cd-wrap { width: auto; height: auto; margin: 0; display: block; place-items: unset; }
+.cd-num {
+  font: 800 calc(var(--u) * 66) / .78 var(--sans);
+  letter-spacing: -.07em;
+  margin-left: -.05em;
+  color: var(--fg);
+}
+.final .cd-num { color: var(--lime); }
+.cd-num.tick { animation: mgTick .7s cubic-bezier(.2, .8, .2, 1); }
+@keyframes mgTick { from { opacity: 0; transform: translateY(.06em); clip-path: inset(-20% 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(-20% -5% -20% -5%); } }
+.final .cd-wrap { animation: none; }
+.cd-wish {
+  position: absolute;
+  right: var(--pad);
+  bottom: calc(var(--u) * 14);
+  font: italic 300 calc(var(--u) * 7) / 1 var(--serif);
+  color: var(--lime);
+  height: auto;
+}
+.mg-line { position: absolute; left: var(--pad); right: var(--pad); bottom: calc(var(--u) * 8); height: 2px; background: var(--line); }
+.mg-line i { display: block; height: 100%; background: var(--lime); }
+
+/* ───── celebration: the cover ───── */
+#celebrate .center {
+  position: absolute;
+  left: var(--pad);
+  top: calc(var(--u) * 9);
+  width: 47vw;
+  margin: 0;
+  align-items: flex-start;
+  text-align: left;
+}
+.mg-mast {
+  font: 800 calc(var(--u) * 27) / .8 var(--sans);
+  letter-spacing: -.065em;
+  margin-left: -.05em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0;
+}
+.state-celebrate .mg-mast { animation: mgMast 1.6s cubic-bezier(.2, .8, .2, 1) .6s forwards; }
+@keyframes mgMast { from { opacity: 0; clip-path: inset(100% 0 0 0); transform: translateY(.2em); } to { opacity: 1; clip-path: inset(-10% 0 -10% 0); transform: none; } }
+.greet {
+  font: italic 300 calc(var(--u) * 6) / 1.1 var(--serif);
+  color: var(--lime);
+  padding: 0;
+  margin-top: calc(var(--u) * 3);
+  text-shadow: none;
+}
+.name { display: none; }
+.note { display: none; }
+.mg-lines { list-style: none; margin-top: calc(var(--u) * 4); border-top: 1px solid var(--line); width: 100%; }
+.mg-lines li {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 18) 1fr;
+  align-items: baseline;
+  padding: calc(var(--u) * 1.6) 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+}
+.state-celebrate .mg-lines li { animation: fadeUp 1s ease forwards; animation-delay: calc(3.2s + var(--i) * .25s); }
+.mg-lines b { font: 500 calc(var(--u) * 1.6) / 1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--lime); }
+.mg-lines span { font: 500 calc(var(--u) * 3) / 1.15 var(--sans); letter-spacing: -.01em; }
+
+.age { left: calc(100% + 1vw); top: calc(var(--u) * 46); transform: none; z-index: 12; }
+.age span {
+  width: calc(var(--u) * 19);
+  height: calc(var(--u) * 19);
+  border-radius: 50%;
+  background: var(--lime);
+  color: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font: 800 calc(var(--u) * 8.5) / .9 var(--sans);
+  letter-spacing: -.05em;
+  transform: rotate(-10deg);
+}
+.age small { font: 500 calc(var(--u) * 1.7) / 1 var(--sans); letter-spacing: .2em; text-transform: uppercase; margin-top: calc(var(--u) * .6); }
+.state-celebrate .age span { animation: mgStamp .8s cubic-bezier(.3, 1.6, .5, 1) 2.4s both; }
+@keyframes mgStamp { from { opacity: 0; transform: scale(2) rotate(-30deg); } to { opacity: 1; transform: rotate(-10deg); } }
+
+/* cover photo (one slot, no polaroid frame) */
+.polaroids { position: absolute; inset: 0; width: auto; }
+.polaroids.right { display: none; }
+.left .slot:nth-child(1) {
+  left: auto;
+  right: var(--pad);
+  top: calc(var(--u) * 9);
+  width: 38vw;
+  --r: 0deg;
+  animation: none;
+}
+.polaroid, .polaroid.landscape { width: 100%; left: 0; top: 0; padding: 0; background: none; border-radius: 0; box-shadow: none; }
+.polaroid .photo, .polaroid.square .photo, .polaroid.landscape .photo {
+  aspect-ratio: auto;
+  height: calc(100vh - var(--u) * 24);
+  background-position: center 30%;
+}
+.polaroid .cap {
+  justify-content: flex-start;
+  height: auto;
+  padding: calc(var(--u) * 1.2) 0 0;
+  font: 500 calc(var(--u) * 1.6) / 1.2 var(--sans);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.polaroid .cap::before { content: "Фото"; color: var(--lime); margin-right: .8em; }
+.polaroid.in { animation: mgPhoto 1.6s cubic-bezier(.2, .8, .2, 1) forwards; }
+.polaroid.out { animation: mgPhotoOut 1s ease forwards; }
+@keyframes mgPhoto { from { opacity: 0; clip-path: inset(0 0 0 100%); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+@keyframes mgPhotoOut { to { opacity: 0; } }
+
+.quote { display: none; }
+
+/* letter: editor's letter */
+.paper {
+  background: var(--fg);
+  color: #111;
+  border-radius: 0;
+  box-shadow: 0 calc(var(--u) * 3) calc(var(--u) * 8) rgba(0, 0, 0, .6);
+  transform: none;
+}
+#celebrate.reading .paper { transform: none; }
+.paper::before {
+  content: "Лист редактора";
+  display: block;
+  font: 500 calc(var(--u) * 1.6) / 1 var(--sans);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #6a6a6a;
+  padding-bottom: calc(var(--u) * 2);
+  margin-bottom: calc(var(--u) * 2.5);
+  border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+.l-sign { color: #111; }
+.l-body::after { background: #111; }
+.seal { border-radius: 0; background: var(--lime); box-shadow: none; width: calc(var(--u) * 7); height: calc(var(--u) * 7); }
+.seal span { font: 800 calc(var(--u) * 3) / 1 var(--sans); color: #111; text-shadow: none; letter-spacing: -.04em; }
+#celebrate.reading .mg-lines, #celebrate.reading .age { opacity: 0; transition: opacity 1s; }

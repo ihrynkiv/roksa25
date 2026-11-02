@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Роксолана · 25</title>
+  <title>Рокса · 25</title>
   <meta name="theme-color" content="#08070a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%235c1427'/><text x='32' y='42' font-size='28' text-anchor='middle' fill='%23f3e9dc' font-family='Georgia,serif'>25</text></svg>">
   <link rel="preload" href="assets/fonts/GreatVibes-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/CormorantGaramond-300-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/fonts/fonts-modern.css">
   <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <!-- picks the theme (?theme=… → saved choice → config) and loads themes/<id>.css -->
+  <script src="themes/registry.js"></script>
 </head>
 <body class="state-idle">
 
@@ -28,10 +32,13 @@
   <div class="flowers fl-a" aria-hidden="true"></div>
   <div class="flowers fl-b" aria-hidden="true"></div>
 
+  <!-- theme decorations (filled by themes/<id>.js) -->
+  <div class="decor" id="decor" aria-hidden="true"></div>
+
   <!-- ───────── before midnight ───────── -->
   <section id="idle" class="scene">
     <p class="eyebrow" id="idle-date"></p>
-    <h1 class="script idle-name">Роксолана</h1>
+    <h1 class="script idle-name" data-fill="short">Рокса</h1>
     <div class="clock" id="clock">--:--<span>--</span></div>
     <p class="whisper">Birthday is coming.</p>
   </section>
@@ -122,13 +129,14 @@
   <div class="grain" aria-hidden="true"></div>
 
   <div class="controls" id="controls">
+    <select id="theme-select" title="Theme (keys 1–9)" aria-label="Theme"></select>
     <button id="btn-test" title="Run the 60-second countdown now (T)">Test</button>
     <button id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen">⛶</button>
   </div>
 
-  <script src="config.js"></script>
   <script src="flowers.js"></script>
   <script src="effects.js"></script>
+  <script>document.write('<script src="themes/' + window.THEME_ID + '.js"><\/script>');</script>
   <script src="app.js"></script>
 </body>
 </html>
