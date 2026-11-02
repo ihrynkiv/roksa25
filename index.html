@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Роксолана · 25</title>
+  <meta name="theme-color" content="#08070a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%235c1427'/><text x='32' y='42' font-size='28' text-anchor='middle' fill='%23f3e9dc' font-family='Georgia,serif'>25</text></svg>">
+  <link rel="preload" href="assets/fonts/GreatVibes-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/CormorantGaramond-300-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="state-idle">
+
+  <!-- slowly drifting colour fields: black · green · purple · burgundy -->
+  <div class="bg" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+  </div>
+
+  <canvas id="ambient" aria-hidden="true"></canvas>
+  <canvas id="fireworks" aria-hidden="true"></canvas>
+
+  <!-- procedural peonies & lilies (drawn by flowers.js) -->
+  <div class="flowers fl-a" aria-hidden="true"></div>
+  <div class="flowers fl-b" aria-hidden="true"></div>
+
+  <!-- ───────── before midnight ───────── -->
+  <section id="idle" class="scene">
+    <p class="eyebrow" id="idle-date"></p>
+    <h1 class="script idle-name">Роксолана</h1>
+    <div class="clock" id="clock">--:--<span>--</span></div>
+    <p class="whisper">Birthday is coming.</p>
+  </section>
+
+  <!-- ───────── the last minute ───────── -->
+  <section id="countdown" class="scene" aria-live="polite">
+    <p class="eyebrow cd-label">до двадцяти п'яти</p>
+    <div class="cd-wrap">
+      <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d9c2ff"/>
+            <stop offset=".55" stop-color="#b8456f"/>
+            <stop offset="1" stop-color="#6fbf93"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-track" cx="100" cy="100" r="92"/>
+        <circle class="ring-bar" id="ring-bar" cx="100" cy="100" r="92"/>
+      </svg>
+      <div class="cd-num" id="cd-num">60</div>
+    </div>
+    <p class="cd-wish script">загадай бажання</p>
+  </section>
+
+  <!-- ───────── 00:00 and after ───────── -->
+  <section id="celebrate" class="scene">
+    <div class="polaroids left" id="pl-left"></div>
+    <div class="polaroids right" id="pl-right"></div>
+
+    <div class="center">
+      <div class="age" aria-hidden="true"><span>25</span></div>
+      <p class="greet script"><span>З днем народження,</span></p>
+      <h1 class="name" id="name"></h1>
+      <p class="note">ти — моя улюблена історія</p>
+    </div>
+
+    <footer class="quote" id="quote">
+      <p class="q-text"></p>
+      <p class="q-by"></p>
+    </footer>
+  </section>
+
+  <!-- the record that is (really) playing in the living room -->
+  <div class="vinyl" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <radialGradient id="vinylShine" cx=".5" cy=".5" r=".5">
+          <stop offset=".3" stop-color="#151316"/>
+          <stop offset=".95" stop-color="#050506"/>
+          <stop offset="1" stop-color="#000"/>
+        </radialGradient>
+        <linearGradient id="vinylGloss" x1="0" y1="0" x2="1" y2="1">
+          <stop offset=".3" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity=".13"/>
+          <stop offset=".7" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <path id="labelArc" d="M100,100 m-24,0 a24,24 0 1,1 48,0 a24,24 0 1,1 -48,0"/>
+      </defs>
+      <g class="vinyl-disc">
+        <circle cx="100" cy="100" r="98" fill="url(#vinylShine)"/>
+        <g fill="none" stroke="#2a262c" stroke-width=".6" opacity=".9">
+          <circle cx="100" cy="100" r="90"/><circle cx="100" cy="100" r="84"/>
+          <circle cx="100" cy="100" r="78"/><circle cx="100" cy="100" r="71"/>
+          <circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="57"/>
+          <circle cx="100" cy="100" r="50"/><circle cx="100" cy="100" r="44"/>
+        </g>
+        <circle cx="100" cy="100" r="34" fill="#6b1830"/>
+        <circle cx="100" cy="100" r="34" fill="none" stroke="#3e0d1b" stroke-width="2"/>
+        <text font-family="Cormorant Garamond, serif" font-size="8.5" letter-spacing="2.4" fill="#f3e9dc" opacity=".85">
+          <textPath href="#labelArc">SIDE A · 25 YEARS · SIDE B · TOGETHER ·</textPath>
+        </text>
+        <text x="100" y="105" text-anchor="middle" font-family="Great Vibes, cursive" font-size="16" fill="#f3e9dc">R</text>
+        <circle cx="100" cy="100" r="2.4" fill="#08070a"/>
+      </g>
+      <circle cx="100" cy="100" r="98" fill="url(#vinylGloss)"/>
+    </svg>
+  </div>
+
+  <div class="flash" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="controls" id="controls">
+    <button id="btn-test" title="Run the 60-second countdown now (T)">Test</button>
+    <button id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen">⛶</button>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="flowers.js"></script>
+  <script src="effects.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
