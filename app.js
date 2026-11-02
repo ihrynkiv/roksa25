@@ -87,9 +87,20 @@
   var nextPhoto = 0;
   var photoTimer = null, quoteTimer = null, fwTimers = [];
 
+  // remember each photo's shape so the polaroid can match it
+  var loaded = {};
+  function load(photo, cb) {
+    if (loaded[photo.src]) return cb(loaded[photo.src]);
+    var im = new Image();
+    im.onload = function () { loaded[photo.src] = im.naturalWidth / im.naturalHeight; cb(loaded[photo.src]); };
+    im.onerror = function () { cb(0.8); };
+    im.src = photo.src;
+  }
+
   function polaroidEl(photo) {
     var el = document.createElement("div");
-    el.className = "polaroid";
+    var r = loaded[photo.src] || 0.8;
+    el.className = "polaroid" + (r > 1.15 ? " landscape" : r > 0.9 ? " square" : "");
     el.innerHTML = '<div class="photo"></div><div class="cap"></div>';
     el.querySelector(".photo").style.backgroundImage = 'url("' + photo.src + '")';
     el.querySelector(".cap").textContent = photo.caption || "";
@@ -116,6 +127,11 @@
   }
 
   function putPhoto(slotIdx, photoIdx) {
+    shown[slotIdx] = photoIdx;
+    load(photos[photoIdx], function () { swapPhoto(slotIdx, photoIdx); });
+  }
+
+  function swapPhoto(slotIdx, photoIdx) {
     var slot = slots[slotIdx];
     var old = slot.querySelector(".polaroid");
     var el = polaroidEl(photos[photoIdx]);
@@ -128,12 +144,11 @@
       slot.appendChild(el);
       el.classList.add("in");
     }
-    shown[slotIdx] = photoIdx;
   }
 
   function startPhotos() {
     // warm the cache so nothing pops in late
-    photos.forEach(function (p) { var im = new Image(); im.src = p.src; });
+    photos.forEach(function (p) { load(p, function () {}); });
     buildSlots();
     shown = [];
     slots.forEach(function (_, i) {
@@ -151,7 +166,7 @@
         }
         putPhoto(slotIdx, nextPhoto);
         nextPhoto = (nextPhoto + 1) % photos.length;
-      }, 9000);
+      }, 8000);
     }
   }
 

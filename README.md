@@ -21,7 +21,7 @@ URL options: `?test`, `?test=10`, `?celebrate`, `?daily` (the countdown runs eve
 ## Editing
 
 Everything personal is in `config.js`: name, date, photos + captions, and quotes.
-To add a photo, drop it into `assets/photos/` and add a line to `PHOTOS`. Portrait (4:5) photos fit the polaroids best.
+To add a photo, drop it into `assets/photos/` and add a line to `PHOTOS`. Portrait, landscape and square photos all work. Please resize big photos first (≈1600 px is plenty for a TV) and remove location data, because the site is public.
 
 ## On the night
 

@@ -394,6 +394,9 @@ canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: n
   box-shadow: inset 0 0 calc(var(--u) * 2) rgba(0, 0, 0, .35);
   filter: contrast(1.03) saturate(.95);
 }
+.polaroid.square .photo { aspect-ratio: 1 / 1; }
+.polaroid.landscape { width: 128%; left: -14%; top: calc(var(--u) * 5); }
+.polaroid.landscape .photo { aspect-ratio: 3 / 2; background-position: center; }
 .polaroid .cap {
   font-family: var(--hand);
   font-weight: 500;

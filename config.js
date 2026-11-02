@@ -5,7 +5,7 @@
  *
  *  Adding photos: put the file in assets/photos/ and add a line to
  *  PHOTOS below. `caption` is the handwritten line under the polaroid.
- *  Portrait photos (taller than wide) look best.
+ *  Portrait, landscape and square photos all work: the polaroid adapts.
  */
 window.BIRTHDAY = {
   name: "Роксолано",          // vocative, used in "З днем народження, …"
@@ -18,11 +18,27 @@ window.BIRTHDAY = {
   everyMidnight: false,
 
   PHOTOS: [
-    { src: "assets/photos/5.jpg", caption: "головна героїня мого роману" },
-    { src: "assets/photos/2.jpg", caption: "світ — твоїми очима" },
-    { src: "assets/photos/3.jpg", caption: "затишок має обличчя" },
-    { src: "assets/photos/4.jpg", caption: "найсерйозніше фото року" },
-    { src: "assets/photos/1.jpg", caption: "Львів у жовтому, твоїм об'єктивом" },
+    { src: "assets/photos/bw-selfie.jpg",       caption: "головна героїня мого роману" },
+    { src: "assets/photos/winter-walk.jpg",     caption: "та сама зима, з якої все почалося" },
+    { src: "assets/photos/ladybug.jpg",         caption: "квіти — від мене, кадр — від тебе" },
+    { src: "assets/photos/kyiv-kiss.jpg",       caption: "туристи в Києві, закохані всюди" },
+    { src: "assets/photos/hamster.jpg",         caption: "найсерйозніше фото року" },
+    { src: "assets/photos/amsterdam.jpg",       caption: "Амстердам, вперше і на сонці" },
+    { src: "assets/photos/us-selfie.jpg",       caption: "моя улюблена команда з двох" },
+    { src: "assets/photos/kitty.jpg",           caption: "дві наймʼякші істоти в домі" },
+    { src: "assets/photos/kyiv-binoculars.jpg", caption: "вдивляється в майбутнє (там я)" },
+    { src: "assets/photos/towel.jpg",           caption: "затишок має обличчя" },
+    { src: "assets/photos/work-party.jpg",      caption: "That one night. Корпоративна версія" },
+    { src: "assets/photos/her-selfie.jpg",      caption: "просто красива. без підпису" },
+    { src: "assets/photos/tea.jpg",             caption: "чай?! а де моя V60-дівчинка" },
+    { src: "assets/photos/couple-fun.jpg",      caption: "офіційно дивакуваті разом" },
+    { src: "assets/photos/bestie.jpg",          caption: "старі добрі часи" },
+    { src: "assets/photos/lviv-yellow.jpg",     caption: "Львів у жовтому, твоїм обʼєктивом" },
+    { src: "assets/photos/kyiv-together.jpg",   caption: "ми + Київ" },
+    { src: "assets/photos/home-fun.jpg",        caption: "домашня, справжня, моя" },
+    { src: "assets/photos/color-date.jpg",      caption: "наше кольорове побачення" },
+    { src: "assets/photos/her-selfie-2.jpg",    caption: "ще одна, бо не можу обрати" },
+    // { src: "assets/photos/work-party-trio.jpg", caption: "" },
   ],
 
   // Lines that slowly rotate at the bottom after midnight.
