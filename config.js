@@ -41,6 +41,20 @@ window.BIRTHDAY = {
     // { src: "assets/photos/work-party-trio.jpg", caption: "" },
   ],
 
+  // A letter that writes itself on screen ~1 minute after midnight, then every 5 minutes.
+  // Edit freely — line breaks are kept. Press L to preview it.
+  LETTER: {
+    text:
+      "Роксолано,\n\n" +
+      "двадцять пʼять років тому світ отримав людину, яка читає «Грозовий перевал», як лист від старого друга, " +
+      "заварює V60, ніби це маленька медитація, і сміється з Двайта до сліз.\n\n" +
+      "А я отримав тебе — і досі не можу повірити, що мені так пощастило.\n\n" +
+      "Дякую за кожну зиму, кожне місто і кожну пісню, яку ми слухали разом. " +
+      "Хай цей рік буде теплим, як твоя улюблена кава, і довгим, як хороша книжка.\n\n" +
+      "З днем народження, моя найулюбленіша історія.",
+    signature: "Твій Іван",
+  },
+
   // Lines that slowly rotate at the bottom after midnight.
   QUOTES: [
     { text: "Whatever our souls are made of, yours and mine are the same.", by: "майже Емілі Бронте" },

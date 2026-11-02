@@ -202,11 +202,16 @@
     var m = Math.min(w, h);
     for (var i = rockets.length - 1; i >= 0; i--) {
       var r = rockets[i];
+      var px = r.x, py = r.y;
       r.y += r.vy;
       r.vy += 0.12;
       r.x += (r.tx - r.x) * 0.02;
-      fw.globalAlpha = 0.55;
-      fw.drawImage(sparkSprites[r.color], r.x - 4, r.y - 4, 8, 8);
+      fw.globalAlpha = 0.7;
+      fw.strokeStyle = hexA(r.color, 0.8);
+      fw.lineWidth = 2;
+      fw.lineCap = "round";
+      fw.beginPath(); fw.moveTo(px, py); fw.lineTo(r.x, r.y); fw.stroke();
+      fw.drawImage(sparkSprites[r.color], r.x - 5, r.y - 5, 10, 10);
       if (r.vy >= -0.5 || r.y <= r.ty) { explode(r); rockets.splice(i, 1); }
     }
     for (var j = sparks.length - 1; j >= 0; j--) {

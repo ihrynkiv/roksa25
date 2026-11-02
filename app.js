@@ -6,6 +6,7 @@
  *  celebrate  → 00:00 and the whole birthday day
  *
  *  Keys:  T = test (start the 60 s countdown now)   C = skip straight to the celebration
+ *         L = show the letter
  *         F = fullscreen                            R / Esc = back to real time
  *  URL:   ?test       start the test countdown on load (?test=10 → from 10 s)
  *         ?daily      run the countdown every night at 23:59
@@ -194,6 +195,38 @@
 
   function later(ms, fn) { fwTimers.push(setTimeout(fn, ms)); }
 
+  /* the letter */
+  var letterBusy = false;
+  function showLetter() {
+    var L = CFG.LETTER;
+    var cel = document.getElementById("celebrate");
+    if (!L || !L.text || letterBusy || state !== "celebrate") return;
+    letterBusy = true;
+    var bodyEl = cel.querySelector(".l-body");
+    var signEl = cel.querySelector(".l-sign");
+    var chars = Array.from(L.text);
+    bodyEl.textContent = "";
+    bodyEl.classList.remove("done");
+    signEl.textContent = L.signature || "";
+    signEl.classList.remove("on");
+    cel.classList.add("reading");
+    var i = 0;
+    var typer = setInterval(function () {
+      var ch = chars[i++];
+      bodyEl.textContent += ch;
+      if (i >= chars.length) {
+        clearInterval(typer);
+        bodyEl.classList.add("done");
+        signEl.classList.add("on");
+        later(22000, function () {
+          cel.classList.remove("reading");
+          later(1800, function () { letterBusy = false; });
+        });
+      }
+    }, 42);
+    fwTimers.push(typer);
+  }
+
   function startCelebration(big) {
     var flash = document.querySelector(".flash");
     if (big) {
@@ -214,6 +247,8 @@
     fwTimers.push(setInterval(function () { if (Math.random() < 0.5) FX.heart(); }, 45000));
     later(2500, function () { FX.setPetals(Math.round(Math.min(innerWidth, innerHeight) / 18)); });
     FX.setFireflies(0.6);
+    later(big ? 70000 : 25000, showLetter);
+    fwTimers.push(setInterval(showLetter, 300000));
     startPhotos();
     startQuotes();
   }
@@ -268,6 +303,7 @@
     clearInterval(photoTimer); clearInterval(quoteTimer);
     fwTimers.forEach(function (t) { clearTimeout(t); clearInterval(t); });
     fwTimers = [];
+    letterBusy = false;
     // restart CSS entry animations
     var c = document.getElementById("celebrate");
     var clone = c.cloneNode(true);
@@ -295,6 +331,7 @@
     if (k === "t") runTest(e.shiftKey ? 10 : 60);
     else if (k === "c") { resetCelebration(); setState("celebrate", true); }
     else if (k === "f") toggleFullscreen();
+    else if (k === "l") { if (state !== "celebrate") setState("celebrate", false); setTimeout(showLetter, 300); }
     else if (k === "r" || k === "escape") { offset = 0; resetCelebration(); setState("idle"); }
   });
 

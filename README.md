@@ -13,6 +13,7 @@ A birthday "wallpaper" for the living-room TV.
 | **Test** button (bottom-left, fades out when the mouse is idle) or `T` | Starts the 60 s countdown now |
 | `Shift+T` | Countdown from 10 s |
 | `C` | Skip straight to the celebration |
+| `L` | Show the love letter (it also appears by itself ~1 min after midnight, then every 5 min) |
 | `F` / double-click / ⛶ | Fullscreen |
 | `R` / `Esc` | Back to real time |
 
@@ -20,7 +21,7 @@ URL options: `?test`, `?test=10`, `?celebrate`, `?daily` (the countdown runs eve
 
 ## Editing
 
-Everything personal is in `config.js`: name, date, photos + captions, and quotes.
+Everything personal is in `config.js`: name, date, photos + captions, the letter, and quotes.
 To add a photo, drop it into `assets/photos/` and add a line to `PHOTOS`. Portrait, landscape and square photos all work. Please resize big photos first (≈1600 px is plenty for a TV) and remove location data, because the site is public.
 
 ## On the night
