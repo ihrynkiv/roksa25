@@ -5,14 +5,13 @@
  *  countdown  → 23:59:00 … 23:59:59 the night before the birthday (60 → 1)
  *  celebrate  → 00:00 and the whole birthday day
  *
- *  Keys:  T = test (start the 60 s countdown now)   C = skip straight to the celebration
- *         L = show the letter
- *         F = fullscreen                            R / Esc = back to real time
- *         1…9 = switch theme
- *  Themes: ?theme=classic|dopamine|kitty|magazine|vinyl  (or the dropdown next to Test)
- *  URL:   ?test       start the test countdown on load (?test=10 → from 10 s)
- *         ?daily      run the countdown every night at 23:59
+ *  URL:   ?theme=kitty|dopamine|vinyl|magazine|classic   (same as /roksa25/<theme>/)
+ *         ?test=20    start a countdown from 20 s on load (any 3–60)
  *         ?celebrate  open directly in celebration mode
+ *         ?daily      run the countdown every night at 23:59
+ *         ?controls   show the test buttons (/roksa25/test/ opens this)
+ *  Keys (test mode only): T = 20 s test, Shift+T = 60 s, C = celebrate, L = letter,
+ *         R/Esc = real time, 1–5 = theme.   F = fullscreen (always)
  */
 (function () {
   "use strict";
@@ -157,8 +156,8 @@
     if (old) {
       old.classList.remove("in");
       old.classList.add("out");
-      setTimeout(function () { old.remove(); }, 1300);
-      setTimeout(function () { slot.appendChild(el); el.classList.add("in"); }, 700);
+      setTimeout(function () { old.remove(); }, 550);
+      setTimeout(function () { slot.appendChild(el); el.classList.add("in"); }, 250);
     } else {
       slot.appendChild(el);
       el.classList.add("in");
@@ -188,7 +187,7 @@
         }
         putPhoto(slotIdx, nextPhoto);
         nextPhoto = (nextPhoto + 1) % photos.length;
-      }, TH.photoInterval || 8000);
+      }, TH.photoInterval || CFG.photoSeconds * 1000 || 4000);
     }
   }
 
@@ -316,7 +315,7 @@
 
   /* ───────────── test / controls ───────────── */
   function runTest(fromSeconds) {
-    var s = Math.max(3, Math.min(60, fromSeconds || 60));
+    var s = Math.max(3, Math.min(60, fromSeconds || 20));
     var realNow = new Date();
     var target = nextTarget(realNow);
     if (!daily && isBirthday(realNow)) {
@@ -363,7 +362,6 @@
     themeSel.appendChild(o);
   });
   function switchTheme(id) {
-    try { localStorage.setItem("roksa-theme", id); } catch (e) {}
     var q = new URLSearchParams(location.search);
     q.set("theme", id);
     q.delete("test");
@@ -372,16 +370,29 @@
   themeSel.addEventListener("change", function () { switchTheme(themeSel.value); });
   themeSel.addEventListener("keydown", function (e) { e.stopPropagation(); });
 
-  document.getElementById("btn-test").addEventListener("click", function (e) { e.stopPropagation(); runTest(60); });
-  document.getElementById("btn-fs").addEventListener("click", function (e) { e.stopPropagation(); toggleFullscreen(); });
+  // test controls & shortcuts exist only on /roksa25/test/ (which opens ?controls)
+  var testMode = params.has("controls");
+  if (testMode) body.classList.add("show-controls");
+  function celebrateNow() { resetCelebration(); setState("celebrate", true); }
+  function letterNow() { if (state !== "celebrate") setState("celebrate", false); setTimeout(showLetter, 300); }
+  function resetNow() { offset = 0; resetCelebration(); setState("idle"); }
+  function onClick(id, fn) { document.getElementById(id).addEventListener("click", function (e) { e.stopPropagation(); fn(); }); }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-test]"), function (b) {
+    b.addEventListener("click", function (e) { e.stopPropagation(); runTest(+b.getAttribute("data-test")); });
+  });
+  onClick("btn-cel", celebrateNow);
+  onClick("btn-letter", letterNow);
+  onClick("btn-reset", resetNow);
+  onClick("btn-fs", toggleFullscreen);
   document.addEventListener("dblclick", toggleFullscreen);
   document.addEventListener("keydown", function (e) {
     var k = e.key.toLowerCase();
-    if (k === "t") runTest(e.shiftKey ? 10 : 60);
-    else if (k === "c") { resetCelebration(); setState("celebrate", true); }
-    else if (k === "f") toggleFullscreen();
-    else if (k === "l") { if (state !== "celebrate") setState("celebrate", false); setTimeout(showLetter, 300); }
-    else if (k === "r" || k === "escape") { offset = 0; resetCelebration(); setState("idle"); }
+    if (k === "f") return toggleFullscreen();
+    if (!testMode) return;
+    if (k === "t") runTest(e.shiftKey ? 60 : 20);
+    else if (k === "c") celebrateNow();
+    else if (k === "l") letterNow();
+    else if (k === "r" || k === "escape") resetNow();
     else if (/^[1-9]$/.test(k) && TL[+k - 1]) switchTheme(TL[+k - 1].id);
   });
 
@@ -411,6 +422,6 @@
   /* ───────────── go ───────────── */
   hook("setup");
   if (params.has("celebrate")) { setState("celebrate", true); }
-  else if (params.has("test")) { runTest(parseInt(params.get("test"), 10) || 60); }
+  else if (params.has("test")) { runTest(parseInt(params.get("test"), 10) || 20); }
   requestAnimationFrame(tick);
 })();

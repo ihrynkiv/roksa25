@@ -44,7 +44,6 @@
 
   window.THEME = {
     slots: 3,
-    photoInterval: 7500,
     setup: function () {
       FX.configure({
         fireflyCount: 18,

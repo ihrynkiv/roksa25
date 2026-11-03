@@ -128,9 +128,15 @@
   <div class="flash" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- only visible on /roksa25/test/ (?controls) -->
   <div class="controls" id="controls">
-    <select id="theme-select" title="Theme (keys 1–9)" aria-label="Theme"></select>
-    <button id="btn-test" title="Run the 60-second countdown now (T)">Test</button>
+    <select id="theme-select" title="Theme (keys 1–5)" aria-label="Theme"></select>
+    <button data-test="60" title="Countdown from 60 s (Shift+T)">▶ 60s</button>
+    <button data-test="20" title="Countdown from 20 s (T)">▶ 20s</button>
+    <button data-test="10" title="Countdown from 10 s">▶ 10s</button>
+    <button id="btn-cel" title="Jump to the celebration (C)">🎉</button>
+    <button id="btn-letter" title="Show the letter (L)">💌</button>
+    <button id="btn-reset" title="Back to real time (R)">↺</button>
     <button id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen">⛶</button>
   </div>
 

@@ -424,8 +424,8 @@ canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: n
 .slot:nth-child(2) .polaroid::before { background: rgba(111, 191, 147, .5); transform: translateX(-50%) rotate(4deg); }
 .right .slot:nth-child(1) .polaroid::before { background: rgba(156, 44, 79, .5); }
 
-.polaroid.in { animation: dropIn 1.6s cubic-bezier(.2, .9, .25, 1.05) forwards; }
-.polaroid.out { animation: liftOut 1.2s ease-in forwards; }
+.polaroid.in { animation: dropIn .9s cubic-bezier(.2, .9, .25, 1.05) forwards; }
+.polaroid.out { animation: liftOut .5s ease-in forwards; }
 @keyframes dropIn {
   0% { opacity: 0; transform: translateY(calc(var(--u) * -12)) rotate(calc(var(--r) * -2.5)) scale(1.15); }
   60% { opacity: 1; }
@@ -440,6 +440,8 @@ canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: n
 @keyframes float { to { transform: translateY(calc(var(--u) * -1.4)); } }
 
 /* ───────────────────────── controls ───────────────────────── */
+.controls { display: none !important; }
+body.show-controls .controls { display: flex !important; }
 .controls {
   position: fixed;
   z-index: 60;

@@ -17,28 +17,32 @@ All themes share the same show:
 | 📰 Magazine | `/roksa25/magazine/` | dark editorial cover: giant masthead, cover photo, cover lines, lime "25" sticker |
 | 💿 Vinyl | `/roksa25/vinyl/` | record club: the record leaves its sleeve, the tonearm crosses it during the countdown, the needle drops at midnight |
 
-Switch with the **dropdown** next to the Test button, with keys **1–5**, or with the links above.
-The last choice is remembered on that device. The default for a fresh device is `theme` in `config.js` (currently Kitty).
+- `/roksa25/` always opens **Kitty** (set by `theme` in `config.js`).
+- Every theme has its own address: `/roksa25/vinyl/` or `/roksa25/?theme=vinyl`, so each screen can show a different one.
+- `/roksa25/test/` is the same site **with test buttons**: theme picker, ▶ 60s / 20s / 10s countdowns, 🎉 celebration, 💌 letter, ↺ back to real time.
+  The normal addresses show no buttons, and keyboard shortcuts work only on the test page (except `F` for fullscreen).
 
-## Controls
+## URL options
 
 | | |
 |---|---|
-| **Test** button (bottom-left, fades out when the mouse is idle) or `T` | Starts the 60 s countdown now |
-| `Shift+T` | Countdown from 10 s |
-| `C` | Skip straight to the celebration |
-| `L` | Show the love letter now |
-| `F` / double-click / ⛶ | Fullscreen |
-| `R` / `Esc` | Back to real time |
-| `1`–`5` | Switch theme |
+| `?theme=vinyl` | pick a theme |
+| `?test=20` | start a countdown from 20 s on load (any 3–60), e.g. `/roksa25/dopamine/?test=15` |
+| `?celebrate` | open straight in the celebration |
+| `?daily` | run the countdown every night at 23:59 |
 
-URL options: `?theme=kitty`, `?test`, `?test=10`, `?celebrate`, `?daily` (the countdown runs every night at 23:59). They combine, e.g. `/roksa25/vinyl/?test=10`.
+Test-page keys: `T` = 20 s test, `Shift+T` = 60 s, `C` = celebrate, `L` = letter, `R` = real time, `1`–`5` = theme, `F` = fullscreen.
 
-## Editing
+## Editing (photo titles, letter, quotes)
 
-Everything personal is in `config.js`: name, date, default theme, photos + captions, the letter, and quotes.
+Everything personal is in **`config.js`**. Easiest way, right on GitHub:
+
+1. Open the repo → `config.js` → the ✏️ pencil icon.
+2. Change the text in quotes after `caption:` (or the letter / quotes).
+3. **Commit changes** (to the default branch). The site updates by itself in ~1–2 minutes.
+
 Theme-specific texts (e.g. the Magazine cover lines) are at the top of `themes/<theme>.js`.
-To add a photo, drop it into `assets/photos/` and add a line to `PHOTOS`. Portrait, landscape and square photos all work. Please resize big photos first (≈1600 px is plenty for a TV) and remove location data, because the site is public.
+To add a photo, put it in `assets/photos/` and add a line to `PHOTOS`. Resize big photos first (≈1600 px is plenty) and remove location data, because the site is public.
 
 ## On the night
 

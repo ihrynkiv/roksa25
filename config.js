@@ -17,11 +17,15 @@ window.BIRTHDAY = {
   // true = run the countdown every night at 23:59 (also enabled with ?daily in the URL)
   everyMidnight: false,
 
-  // Default look: classic | dopamine | kitty | magazine | vinyl
-  // (the dropdown next to "Test" and links like /roksa25/kitty/ override this and are remembered)
+  // Theme for the plain address /roksa25/ : classic | dopamine | kitty | magazine | vinyl
+  // Other themes: /roksa25/<theme>/ or ?theme=<theme>.  Test buttons: /roksa25/test/
   theme: "kitty",
 
-  // Shown in this order, a few at a time. Each photo stays ~30 s (one card changes every 8 s).
+  // One photo card changes every `photoSeconds`. With 4 cards on screen each photo stays ~4× that.
+  // (Magazine shows one big photo, so it uses 6 s per photo.)
+  photoSeconds: 4,
+
+  // Photos are shown in this order. To change a title, edit the text in quotes after `caption:`.
   PHOTOS: [
     { src: "assets/photos/us-two.jpg",            caption: "просто ми" },
     { src: "assets/photos/bw-selfie.jpg",         caption: "головна героїня мого роману" },

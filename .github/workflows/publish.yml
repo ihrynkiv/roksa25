@@ -1,0 +1,21 @@
+# Every push to the main branch (including edits made in the GitHub web editor)
+# is copied to the gh-pages branch, which is what GitHub Pages serves.
+name: Publish site
+on:
+  push:
+    branches: [claude/optimistic-cori-0n2we3]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish
+  cancel-in-progress: true
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Copy to gh-pages
+        run: git push --force origin HEAD:gh-pages

@@ -1,6 +1,6 @@
 /*
  * Theme registry. Each theme = themes/<id>.css (look) + themes/<id>.js (decorations & hooks).
- * Choice order: ?theme=<id> in the URL → last choice saved on this device → config.js `theme`.
+ * Choice: ?theme=<id> in the URL (the /<id>/ links add it), otherwise config.js `theme` (Kitty).
  */
 (function () {
   var LIST = [
@@ -14,11 +14,7 @@
   var id = null;
   try {
     var q = new URLSearchParams(location.search).get("theme");
-    if (q && ids.indexOf(q) !== -1) { id = q; localStorage.setItem("roksa-theme", q); }
-    if (!id) {
-      var saved = localStorage.getItem("roksa-theme");
-      if (saved && ids.indexOf(saved) !== -1) id = saved;
-    }
+    if (q && ids.indexOf(q) !== -1) id = q;
   } catch (e) {}
   if (!id) id = (window.BIRTHDAY && ids.indexOf(window.BIRTHDAY.theme) !== -1) ? window.BIRTHDAY.theme : "classic";
 
