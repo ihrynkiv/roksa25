@@ -51,9 +51,9 @@ window.BIRTHDAY = {
   // Lines that slowly rotate at the bottom after midnight.
   QUOTES: [
     { text: "Whatever our souls are made of, yours and mine are the same.", by: "майже Емілі Бронте" },
-    { text: "Двадцять п'ять років світові щастить із тобою. А мені — найбільше.", by: "я" },
+    { text: "Радий бути частиною твого життя", by: "я" },
     { text: "Bears. Beets. Birthday cake.", by: "Dwight Schrute (неофіційно)" },
-    { text: "Повільно, уважно, з любов'ю — як V60 о восьмій ранку. Так я хочу прожити з тобою кожен рік.", by: "я" },
+    { text: "Люблю тебе і маю на те купу причин, які готовий завжди розповісти", by: "я" },
     { text: "A girl has a name. And today it's on every screen in the house.", by: "Браавос пам'ятає" },
     { text: "Side A: 25 років. Side B: всі наступні — разом.", by: "наш вініл" },
   ],
