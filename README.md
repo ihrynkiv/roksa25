@@ -5,7 +5,7 @@ A birthday "wallpaper" for the living-room TV, with **five interchangeable theme
 All themes share the same show:
 - **Before midnight:** a wallpaper with her name and a live clock.
 - **23:59:00 on 3 November:** a 60-second countdown. In the last 10 seconds it says *загадай бажання* ("make a wish").
-- **00:00:** the celebration (fireworks or confetti, the name, 25, photo cards and quotes) stays on for the whole day. A love letter writes itself ~1 min after midnight, then every 5 minutes.
+- **00:00:** the celebration (fireworks or confetti, the name, 25, photo cards and quotes) stays on for the whole day. Photos start right away; ~1 min later the love letter writes itself (photos pause), stays 10 s after the last word, then the photos continue. After a full round of photos the letter returns once more.
 
 ## Themes
 
@@ -18,7 +18,7 @@ All themes share the same show:
 | 💿 Vinyl | `/roksa25/vinyl/` | record club: the record leaves its sleeve, the tonearm crosses it during the countdown, the needle drops at midnight |
 
 Switch with the **dropdown** next to the Test button, with keys **1–5**, or with the links above.
-The last choice is remembered on that device. The default for a fresh device is `theme` in `config.js`.
+The last choice is remembered on that device. The default for a fresh device is `theme` in `config.js` (currently Kitty).
 
 ## Controls
 
@@ -27,7 +27,7 @@ The last choice is remembered on that device. The default for a fresh device is 
 | **Test** button (bottom-left, fades out when the mouse is idle) or `T` | Starts the 60 s countdown now |
 | `Shift+T` | Countdown from 10 s |
 | `C` | Skip straight to the celebration |
-| `L` | Show the love letter (it also appears by itself ~1 min after midnight, then every 5 min) |
+| `L` | Show the love letter now |
 | `F` / double-click / ⛶ | Fullscreen |
 | `R` / `Esc` | Back to real time |
 | `1`–`5` | Switch theme |

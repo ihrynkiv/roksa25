@@ -22,7 +22,7 @@
 
   window.THEME = {
     slots: 1,
-    photoInterval: 7000,
+    photoInterval: 9000,
 
     setup: function () {
       FX.configure({

@@ -171,13 +171,16 @@
     buildSlots();
     shown = [];
     slots.forEach(function (_, i) {
-      setTimeout(function () { putPhoto(i, i); }, 4200 + i * 650);
+      later(PHOTOS_START + i * 650, function () { putPhoto(i, i); });
     });
     nextPhoto = slots.length % Math.max(1, photos.length);
     if (photos.length > slots.length) {
       var turn = 0;
       photoTimer = setInterval(function () {
+        if (letterBusy) return; // hold the photos while the letter is on screen
         var slotIdx = turn++ % slots.length;
+        // after a full round of photos, the letter comes back once more
+        if (LT.text && ++swapsSinceLetter >= photos.length && LT.repeatAfterAllPhotos !== false) { showLetter(); return; }
         // pick the next photo that is not currently on screen
         for (var guard = 0; guard < photos.length; guard++) {
           if (shown.indexOf(nextPhoto) === -1) break;
@@ -213,13 +216,17 @@
 
   function later(ms, fn) { fwTimers.push(setTimeout(fn, ms)); }
 
-  /* the letter */
+  /* the letter: ~1 min after the photos start, then again after every full round of photos */
+  var PHOTOS_START = 4200;
+  var LT = CFG.LETTER || {};
   var letterBusy = false;
+  var swapsSinceLetter = 0;
   function showLetter() {
     var L = CFG.LETTER;
     var cel = document.getElementById("celebrate");
     if (!L || !L.text || letterBusy || state !== "celebrate") return;
     letterBusy = true;
+    swapsSinceLetter = 0;
     var bodyEl = cel.querySelector(".l-body");
     var signEl = cel.querySelector(".l-sign");
     var chars = Array.from(L.text);
@@ -236,12 +243,12 @@
         clearInterval(typer);
         bodyEl.classList.add("done");
         signEl.classList.add("on");
-        later(22000, function () {
+        later((LT.holdSeconds != null ? LT.holdSeconds : 10) * 1000, function () {
           cel.classList.remove("reading");
           later(1800, function () { letterBusy = false; });
         });
       }
-    }, 42);
+    }, LT.typingMs || 45);
     fwTimers.push(typer);
   }
 
@@ -269,8 +276,7 @@
       later(2500, function () { FX.setPetals(Math.round(Math.min(innerWidth, innerHeight) / 18)); });
       FX.setFireflies(0.6);
     }
-    later(big ? 70000 : 25000, showLetter);
-    fwTimers.push(setInterval(showLetter, 300000));
+    later(PHOTOS_START + (LT.showAfterSeconds != null ? LT.showAfterSeconds : 60) * 1000, showLetter);
     startPhotos();
     startQuotes();
   }
@@ -327,6 +333,7 @@
     fwTimers.forEach(function (t) { clearTimeout(t); clearInterval(t); });
     fwTimers = [];
     letterBusy = false;
+    swapsSinceLetter = 0;
     // restart CSS entry animations
     var c = document.getElementById("celebrate");
     var clone = c.cloneNode(true);
