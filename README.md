@@ -1,6 +1,6 @@
 # Рокса · 25
 
-A birthday "wallpaper" for the living-room TV, with **five interchangeable themes**.
+A birthday "wallpaper" for the living-room TV, with **six interchangeable themes**.
 
 All themes share the same show:
 - **Before midnight:** a wallpaper with her name and a live clock.
@@ -16,6 +16,7 @@ All themes share the same show:
 | 🐱 Kitty | `/roksa25/kitty/` | pink cartoon: peeking & sleeping cats, cat-face countdown, cake with 2 and 5 candles, hearts & paws |
 | 📰 Magazine | `/roksa25/magazine/` | dark editorial cover: giant masthead, cover photo, cover lines, lime "25" sticker |
 | 💿 Vinyl | `/roksa25/vinyl/` | record club: the record leaves its sleeve, the tonearm crosses it during the countdown, the needle drops at midnight |
+| 🏢 Office | `/roksa25/office/` | mockumentary: memo on the office wall, Kevin's chili, "World's Best" mug, whiteboard countdown with Dwight facts, corkboard award party, quotes as TV subtitles |
 
 - `/roksa25/` always opens **Kitty** (set by `theme` in `config.js`).
 - Every theme has its own address: `/roksa25/vinyl/` or `/roksa25/?theme=vinyl`, so each screen can show a different one.
@@ -33,13 +34,13 @@ All themes share the same show:
 
 Test-page keys: `T` = 20 s test, `Shift+T` = 60 s, `C` = celebrate, `L` = letter, `R` = real time, `1`–`5` = theme, `F` = fullscreen.
 
-## Editing (photo titles, letter, quotes)
+## Editing
 
-Everything personal is in **`config.js`**. Easiest way, right on GitHub:
+**Photo titles:** open **`/roksa25/gallery/`**, change the titles (or untick «показувати» to hide a photo),
+press **Скопіювати photos.js**, then **Відкрити photos.js на GitHub** → select all → paste → **Commit changes**.
+The site updates by itself in ~1–2 minutes.
 
-1. Open the repo → `config.js` → the ✏️ pencil icon.
-2. Change the text in quotes after `caption:` (or the letter / quotes).
-3. **Commit changes** (to the default branch). The site updates by itself in ~1–2 minutes.
+**Letter, quotes, timings:** `config.js` on GitHub → ✏️ → edit → **Commit changes**.
 
 Theme-specific texts (e.g. the Magazine cover lines) are at the top of `themes/<theme>.js`.
 To add a photo, put it in `assets/photos/` and add a line to `PHOTOS`. Resize big photos first (≈1600 px is plenty) and remove location data, because the site is public.

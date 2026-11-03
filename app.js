@@ -98,7 +98,7 @@
   }
 
   /* ───────────── celebration ───────────── */
-  var photos = (CFG.PHOTOS || []).slice();
+  var photos = (CFG.PHOTOS || []).filter(function (p) { return !p.hidden; });
   var slots = [];
   var shown = [];   // photo index per slot
   var nextPhoto = 0;
@@ -192,7 +192,7 @@
   }
 
   var quoteEl = document.getElementById("quote");
-  var quotes = CFG.QUOTES || [];
+  var quotes = TH.quotes || CFG.QUOTES || [];
   var qi = 0;
   function showQuote(i) {
     var q = quotes[i];

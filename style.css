@@ -475,6 +475,7 @@ body.hide-cursor .controls { opacity: 0; pointer-events: none; }
   cursor: pointer;
   backdrop-filter: blur(6px);
 }
+.controls .ctl-link { font: 500 13px/1 system-ui, sans-serif; text-decoration: none; color: inherit; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .22); border-radius: 999px; padding: 8px 12px; }
 .controls button:hover, .controls button:focus-visible { background: rgba(205, 182, 242, .25); outline: none; }
 
 /* ───────────────────────── the letter ───────────────────────── */

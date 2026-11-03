@@ -8,7 +8,8 @@
     { id: "dopamine", label: "🍭 Dopamine — colour pop" },
     { id: "kitty",    label: "🐱 Kitty — pink cartoon" },
     { id: "magazine", label: "📰 Magazine — cover story" },
-    { id: "vinyl",    label: "💿 Vinyl — record club" }
+    { id: "vinyl",    label: "💿 Vinyl — record club" },
+    { id: "office",   label: "🏢 Office — that's what she said" }
   ];
   var ids = LIST.map(function (t) { return t.id; });
   var id = null;

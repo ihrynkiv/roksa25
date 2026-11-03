@@ -17,7 +17,7 @@ window.BIRTHDAY = {
   // true = run the countdown every night at 23:59 (also enabled with ?daily in the URL)
   everyMidnight: false,
 
-  // Theme for the plain address /roksa25/ : classic | dopamine | kitty | magazine | vinyl
+  // Theme for the plain address /roksa25/ : classic | dopamine | kitty | magazine | vinyl | office
   // Other themes: /roksa25/<theme>/ or ?theme=<theme>.  Test buttons: /roksa25/test/
   theme: "kitty",
 
@@ -25,57 +25,8 @@ window.BIRTHDAY = {
   // (Magazine shows one big photo, so it uses 6 s per photo.)
   photoSeconds: 4,
 
-  // Photos are shown in this order. To change a title, edit the text in quotes after `caption:`.
-  PHOTOS: [
-    { src: "assets/photos/us-two.jpg",            caption: "просто ми" },
-    { src: "assets/photos/bw-selfie.jpg",         caption: "головна героїня мого роману" },
-    { src: "assets/photos/winter-walk.jpg",       caption: "та сама зима, з якої все почалося" },
-    { src: "assets/photos/elevator-flowers.jpg",  caption: "квіти від мене їдуть додому" },
-    { src: "assets/photos/kyiv-kiss.jpg",         caption: "туристи в Києві, закохані всюди" },
-    { src: "assets/photos/weeknd-cph.jpg",        caption: "The Weeknd, Копенгаген" },
-    { src: "assets/photos/cafe-date.jpg",         caption: "наше побачення в кавʼярні" },
-    { src: "assets/photos/her-kitty.jpg",         caption: "мур-режим увімкнено" },
-    { src: "assets/photos/odesa-sea.jpg",         caption: "Одеса, море і ти" },
-    { src: "assets/photos/tongue.jpg",            caption: "серйозність: 0%" },
-    { src: "assets/photos/color-date-us.jpg",     caption: "кольорове побачення, ми" },
-    { src: "assets/photos/amsterdam-fav.jpg",     caption: "її улюблене місто" },
-    { src: "assets/photos/hamster.jpg",           caption: "найсерйозніше фото року" },
-    { src: "assets/photos/summer.jpg",            caption: "наше літо" },
-    { src: "assets/photos/rocknroll.jpg",         caption: "трішки рок-н-ролу" },
-    { src: "assets/photos/garden.jpg",            caption: "наш садок біля дому" },
-    { src: "assets/photos/sleepy.jpg",            caption: "ще пʼять хвилиночок…" },
-    { src: "assets/photos/cph-mermaid.jpg",       caption: "Копенгаген, привіт Русалоньці" },
-    { src: "assets/photos/odyssey.jpg",           caption: "кіновечір: «Одіссея»" },
-    { src: "assets/photos/mirror.jpg",            caption: "дзеркало знає, хто тут найкраща" },
-    { src: "assets/photos/us-sea.jpg",            caption: "ми і море" },
-    { src: "assets/photos/dentist.jpg",           caption: "перед стоматологом: сміливість 100%" },
-    { src: "assets/photos/ladybug.jpg",           caption: "квіти — від мене, кадр — від тебе" },
-    { src: "assets/photos/denmark.jpg",           caption: "десь у Данії" },
-    { src: "assets/photos/us-selfie.jpg",         caption: "моя улюблена команда з двох" },
-    { src: "assets/photos/my-flat.jpg",           caption: "у мене вдома, як у себе" },
-    { src: "assets/photos/plane.jpg",             caption: "у небі" },
-    { src: "assets/photos/tea.jpg",               caption: "чай?! а де моя V60-дівчинка" },
-    { src: "assets/photos/color-date-her.jpg",    caption: "кольорове побачення, кольорова ти" },
-    { src: "assets/photos/kyiv-binoculars.jpg",   caption: "вдивляється в майбутнє (там я)" },
-    { src: "assets/photos/at-work.jpg",           caption: "робоча, але найкраща" },
-    { src: "assets/photos/amsterdam-2.jpg",       caption: "ще трохи Амстердама" },
-    { src: "assets/photos/dog-winter.jpg",        caption: "зима, сніг і песик" },
-    { src: "assets/photos/bathroom.jpg",          caption: "селфі-сесія у ванній" },
-    { src: "assets/photos/couple-fun.jpg",        caption: "офіційно дивакуваті разом" },
-    { src: "assets/photos/towel.jpg",             caption: "затишок має обличчя" },
-    { src: "assets/photos/plane-selfie.jpg",      caption: "летимо!" },
-    { src: "assets/photos/amsterdam.jpg",         caption: "Амстердам, вперше і на сонці" },
-    { src: "assets/photos/kitty.jpg",             caption: "дві наймʼякші істоти в домі" },
-    { src: "assets/photos/work-party.jpg",        caption: "That one night. Корпоративна версія" },
-    { src: "assets/photos/her-selfie.jpg",        caption: "просто красива. без підпису" },
-    { src: "assets/photos/bestie.jpg",            caption: "старі добрі часи" },
-    { src: "assets/photos/lviv-yellow.jpg",       caption: "Львів у жовтому, твоїм обʼєктивом" },
-    { src: "assets/photos/kyiv-together.jpg",     caption: "ми + Київ" },
-    { src: "assets/photos/home-fun.jpg",          caption: "домашня, справжня, моя" },
-    { src: "assets/photos/color-date.jpg",        caption: "наше кольорове побачення" },
-    { src: "assets/photos/her-selfie-2.jpg",      caption: "ще одна, бо не можу обрати" },
-    // { src: "assets/photos/work-party-trio.jpg", caption: "" },
-  ],
+  // The photos and their titles live in photos.js (easiest to edit via /roksa25/gallery/).
+
 
   // A letter that writes itself on screen. Edit freely — line breaks are kept. Press L to preview it.
   //   midnight → photos start → after `showAfterSeconds` the letter types itself (photos pause)
