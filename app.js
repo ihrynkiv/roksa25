@@ -18,7 +18,9 @@
 
   var CFG = window.BIRTHDAY;
   var params = new URLSearchParams(location.search);
-  var daily = CFG.everyMidnight || params.has("daily");
+  // On the test page (/roksa25/test/ → ?controls) every midnight counts as the birthday, so it
+  // always opens in the idle state with the live clock, whatever the date.
+  var daily = CFG.everyMidnight || params.has("daily") || params.has("controls");
 
   var offset = 0; // ms added to real time (used by Test)
   function now() { return new Date(Date.now() + offset); }

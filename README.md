@@ -22,6 +22,7 @@ All themes share the same show:
 - Every theme has its own address: `/roksa25/vinyl/` or `/roksa25/?theme=vinyl`, so each screen can show a different one.
 - `/roksa25/test/` is the same site **with test buttons**: theme picker, ▶ 60s / 20s / 10s countdowns, 🎉 celebration, 💌 letter, ↺ back to real time.
   The normal addresses show no buttons, and keyboard shortcuts work only on the test page (except `F` for fullscreen).
+  The test page always opens in the idle state with the live clock (even on 4 November); there every midnight counts as the birthday.
 
 ## URL options
 
