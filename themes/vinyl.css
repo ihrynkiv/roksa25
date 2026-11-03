@@ -165,8 +165,8 @@ html, body { background: var(--bg); color: var(--cream); font-family: var(--text
 .right .slot:nth-child(1) .cap::before { content: "A2"; }
 .left .slot:nth-child(2) .cap::before { content: "A3"; }
 .polaroid .cap::before { font: 600 1em / 1 var(--display); color: var(--mustard); letter-spacing: .1em; margin-right: .8em; flex: none; }
-.polaroid.in { animation: vnCover .7s cubic-bezier(.2, .9, .3, 1.05) forwards; }
-@keyframes vnCover { from { opacity: 0; transform: translateY(calc(var(--u) * 6)) rotate(var(--r)); } to { opacity: 1; transform: rotate(var(--r)); } }
+.polaroid.in { animation: vnCover 1.4s cubic-bezier(.22, .61, .36, 1) forwards; }
+@keyframes vnCover { from { opacity: 0; transform: translateY(calc(var(--u) * 2.5)) rotate(var(--r)); } to { opacity: 1; transform: rotate(var(--r)); } }
 
 .quote { left: auto; right: 7vw; bottom: calc(var(--u) * 3); width: calc(var(--u) * 64); transform: none; text-align: center; }
 .q-text { font: 400 calc(var(--u) * 3) / 1.2 var(--hand); font-style: normal; color: var(--cream); }

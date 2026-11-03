@@ -214,8 +214,8 @@ html, body { background: var(--bg); color: var(--ink); font-family: var(--text);
 .right .slot:nth-child(1) .polaroid::before { background: radial-gradient(circle at 35% 35%, #8fb4ff, var(--marker) 60%, #102a7a); }
 .left .slot:nth-child(2) .polaroid::before { background: radial-gradient(circle at 35% 35%, #fff59a, #e3c414 60%, #8a7400); }
 .polaroid .cap { font: 700 calc(var(--u) * 2.6) / 1.05 var(--hand); color: #2a2a2a; height: auto; min-height: calc(var(--u) * 6); padding: calc(var(--u) * .8) .4em; }
-.polaroid.in { animation: ofPhoto .6s cubic-bezier(.2, .9, .3, 1.1) forwards; }
-@keyframes ofPhoto { from { opacity: 0; transform: translateY(calc(var(--u) * -6)) rotate(calc(var(--r) * -2)) scale(1.08); } to { opacity: 1; transform: rotate(var(--r)); } }
+.polaroid.in { animation: ofPhoto 1.4s cubic-bezier(.22, .61, .36, 1) forwards; }
+@keyframes ofPhoto { from { opacity: 0; transform: translateY(calc(var(--u) * -3)) rotate(calc(var(--r) * -1.5)) scale(1.04); } to { opacity: 1; transform: rotate(var(--r)); } }
 
 /* letter: a memo too */
 .paper { background: var(--paper); border-radius: 2px; color: var(--ink); }

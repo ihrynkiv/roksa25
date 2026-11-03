@@ -242,8 +242,8 @@ body.dp-final .dp-bob { animation-duration: .5s; }
 .right .slot:nth-child(1) .polaroid { background: var(--lime); }
 .left .slot:nth-child(2) .polaroid { background: #ffd0e8; }
 .right .slot:nth-child(2) .polaroid { background: #cfe0ff; }
-.polaroid.in { animation: dpStick .7s cubic-bezier(.3, 1.6, .5, 1) forwards; }
-@keyframes dpStick { from { opacity: 0; transform: scale(.2) rotate(calc(var(--r) * -6)); } to { opacity: 1; transform: rotate(var(--r)); } }
+.polaroid.in { animation: dpStick 1.4s cubic-bezier(.22, .61, .36, 1) forwards; }
+@keyframes dpStick { from { opacity: 0; transform: scale(.88) rotate(calc(var(--r) * -2)); } to { opacity: 1; transform: rotate(var(--r)); } }
 
 /* letter */
 .paper {

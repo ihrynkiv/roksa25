@@ -424,15 +424,15 @@ canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: n
 .slot:nth-child(2) .polaroid::before { background: rgba(111, 191, 147, .5); transform: translateX(-50%) rotate(4deg); }
 .right .slot:nth-child(1) .polaroid::before { background: rgba(156, 44, 79, .5); }
 
-.polaroid.in { animation: dropIn .9s cubic-bezier(.2, .9, .25, 1.05) forwards; }
-.polaroid.out { animation: liftOut .5s ease-in forwards; }
+.polaroid.in { animation: dropIn 1.4s cubic-bezier(.22, .61, .36, 1) forwards; }
+.polaroid.out { animation: liftOut 1.1s ease-in-out forwards; }
 @keyframes dropIn {
-  0% { opacity: 0; transform: translateY(calc(var(--u) * -12)) rotate(calc(var(--r) * -2.5)) scale(1.15); }
-  60% { opacity: 1; }
+  0% { opacity: 0; transform: translateY(calc(var(--u) * -4)) rotate(calc(var(--r) * -1.5)) scale(1.04); }
+  50% { opacity: 1; }
   100% { opacity: 1; transform: rotate(var(--r)); }
 }
 @keyframes liftOut {
-  to { opacity: 0; transform: translateY(calc(var(--u) * 4)) rotate(calc(var(--r) * 2)) scale(.92); }
+  to { opacity: 0; transform: translateY(calc(var(--u) * 1.5)) rotate(var(--r)) scale(.97); }
 }
 /* gentle float once settled */
 .slot { animation: float 9s ease-in-out infinite alternate; }

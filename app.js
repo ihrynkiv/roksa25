@@ -156,8 +156,9 @@
     if (old) {
       old.classList.remove("in");
       old.classList.add("out");
-      setTimeout(function () { old.remove(); }, 550);
-      setTimeout(function () { slot.appendChild(el); el.classList.add("in"); }, 250);
+      // crossfade: the new card starts settling in while the old one is still fading out
+      setTimeout(function () { old.remove(); }, 1200);
+      setTimeout(function () { slot.appendChild(el); el.classList.add("in"); }, 400);
     } else {
       slot.appendChild(el);
       el.classList.add("in");
@@ -175,19 +176,22 @@
     nextPhoto = slots.length % Math.max(1, photos.length);
     if (photos.length > slots.length) {
       var turn = 0;
-      photoTimer = setInterval(function () {
-        if (letterBusy) return; // hold the photos while the letter is on screen
-        var slotIdx = turn++ % slots.length;
-        // after a full round of photos, the letter comes back once more
-        if (LT.text && ++swapsSinceLetter >= photos.length && LT.repeatAfterAllPhotos !== false) { showLetter(); return; }
-        // pick the next photo that is not currently on screen
-        for (var guard = 0; guard < photos.length; guard++) {
-          if (shown.indexOf(nextPhoto) === -1) break;
-          nextPhoto = (nextPhoto + 1) % photos.length;
-        }
-        putPhoto(slotIdx, nextPhoto);
+      var every = TH.photoInterval || CFG.photoSeconds * 1000 || 4000;
+      // start rotating only once the first cards are all on screen
+      later(PHOTOS_START + slots.length * 650 + every, function () { tickPhotos(); photoTimer = setInterval(tickPhotos, every); });
+    }
+    function tickPhotos() {
+      if (letterBusy) return; // hold the photos while the letter is on screen
+      var slotIdx = turn++ % slots.length;
+      // after a full round of photos, the letter comes back once more
+      if (LT.text && ++swapsSinceLetter >= photos.length && LT.repeatAfterAllPhotos !== false) { showLetter(); return; }
+      // pick the next photo that is not currently on screen
+      for (var guard = 0; guard < photos.length; guard++) {
+        if (shown.indexOf(nextPhoto) === -1) break;
         nextPhoto = (nextPhoto + 1) % photos.length;
-      }, TH.photoInterval || CFG.photoSeconds * 1000 || 4000);
+      }
+      putPhoto(slotIdx, nextPhoto);
+      nextPhoto = (nextPhoto + 1) % photos.length;
     }
   }
 

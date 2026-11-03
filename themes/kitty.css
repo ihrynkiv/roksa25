@@ -230,8 +230,8 @@ html, body { background: var(--bg); color: var(--ink); font-family: var(--hand);
 .slot:nth-child(2) .polaroid { background: #fff3c7; }
 .slot:nth-child(2) .polaroid::before, .slot:nth-child(2) .polaroid::after { background: #fff3c7; }
 .right .slot:nth-child(1) .polaroid, .right .slot:nth-child(1) .polaroid::before, .right .slot:nth-child(1) .polaroid::after { background: #e8ddff; }
-.polaroid.in { animation: ktJumpP .7s cubic-bezier(.3, 1.6, .5, 1) forwards; }
-@keyframes ktJumpP { from { opacity: 0; transform: translateY(calc(var(--u) * 20)) rotate(calc(var(--r) * -3)); } to { opacity: 1; transform: rotate(var(--r)); } }
+.polaroid.in { animation: ktJumpP 1.4s cubic-bezier(.22, .61, .36, 1) forwards; }
+@keyframes ktJumpP { from { opacity: 0; transform: translateY(calc(var(--u) * 3)) rotate(calc(var(--r) * -1.5)) scale(.96); } to { opacity: 1; transform: rotate(var(--r)); } }
 
 /* letter */
 .paper {

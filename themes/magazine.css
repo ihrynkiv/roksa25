@@ -171,8 +171,8 @@ html, body { background: var(--bg); color: var(--fg); font-family: var(--sans); 
   color: var(--dim);
 }
 .polaroid .cap::before { content: "Фото"; color: var(--lime); margin-right: .8em; }
-.polaroid.in { animation: mgPhoto .9s cubic-bezier(.2, .8, .2, 1) forwards; }
-.polaroid.out { animation: mgPhotoOut .5s ease forwards; }
+.polaroid.in { animation: mgPhoto 1.6s cubic-bezier(.22, .61, .36, 1) forwards; }
+.polaroid.out { animation: mgPhotoOut 1.1s ease-in-out forwards; }
 @keyframes mgPhoto { from { opacity: 0; clip-path: inset(0 0 0 100%); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 @keyframes mgPhotoOut { to { opacity: 0; } }
 
